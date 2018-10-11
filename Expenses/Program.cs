@@ -21,8 +21,16 @@ namespace Expenses
             // Remove unwanted lines
             var elines = lines.Select(x => x.Trim())
                               .Where(x => !(x.Contains("Orig date") && x.Length == 37))
-                              .Where(x => x != "");
-
+                              .Where(x => x != "")
+                              .Where(x => x.Contains('.'))
+                              .Where(x => !x.Contains("Opening balance"))
+                              .Where(x => !x.Contains("Balance brought forward from previous page"))
+                              .Where(x => !x.Contains("Account type"))
+                              .Where(x => !x.Contains("Totals at end of page"))
+                              .Where(x => !x.Contains("anz.co.nz"))
+                              .Where(x => !x.Contains("Go"))
+                              .Where(x => !x.Contains("International Money Machine"))
+                              .Where(x => !x.Contains("Currency Conversion Charge"));
             
 
             File.WriteAllLines("C:/Users/DEV.KyraT/Desktop/Output-Statement.txt", elines);
